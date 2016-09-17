@@ -13,7 +13,21 @@ class CreateTableCompanies extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('companies', function (Blueprint $table) {
+            $table->increments('id');
+            $table->uuid('uuid');
+            $table->string('name');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('facebook');
+            $table->string('twitter');
+            $table->string('web');
+            $table->string('email');
+            $table->string('description');
+            $table->integer('subcategory_id');
+            $table->softDeletes();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +37,6 @@ class CreateTableCompanies extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('companies');
     }
 }

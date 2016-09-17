@@ -13,7 +13,14 @@ class CreateTableCategories extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->uuid('uuid');
+            $table->string('name');
+            $table->integer('subcategory_id');
+            $table->softDeletes();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ class CreateTableCategories extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('categories');
     }
 }
