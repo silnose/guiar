@@ -15,11 +15,11 @@ class CreateTableCategories extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('uuid');
+            $table->uuid('uuid')->unique();
             $table->string('name');
-            $table->integer('subcategory_id');
             $table->softDeletes();
             $table->timestamps();
+
         });
     }
 

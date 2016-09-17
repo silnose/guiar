@@ -15,7 +15,7 @@ class CreateTableCompanies extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('uuid');
+            $table->uuid('uuid')->unique();
             $table->string('name');
             $table->string('address');
             $table->string('phone');
@@ -24,7 +24,6 @@ class CreateTableCompanies extends Migration
             $table->string('web');
             $table->string('email');
             $table->string('description');
-            $table->integer('subcategory_id');
             $table->softDeletes();
             $table->timestamps();
         });
