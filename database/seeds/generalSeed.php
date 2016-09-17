@@ -13,13 +13,14 @@ class generalSeed extends Seeder
     public function run()
     {
         $objects = [
-            'comercial'=>[
+
+            'comercial' => [
                 'aberturas',
                 'alarmas',
                 'automotores',
                 'cabañas'
             ],
-            'profesional'=>[
+            'profesional' => [
                 'abogados',
                 'contadores',
                 'escribanias',
@@ -34,26 +35,28 @@ class generalSeed extends Seeder
                 'demartologia',
                 'enfermerias'
             ]
+
         ];
 
-        $categoryArray=[];
-       foreach($objects as $var){
 
-           $categoryArray['name']=$var;
+        foreach ($objects as $category=>$subcategories) {
 
-           $category = (new Category())->create($categoryArray);
-           
-           
-       }
+            $categoryArray = [
+                'name' => $category,
+            ];
 
-
-
-        foreach($categories as $category){
+            $categoyModel = (new Category())->create($categoryArray);
 
             foreach($subcategories as $subcategory){
 
-                if($ca)
+                $subCategoryArray = [
+                    'name' => $subcategory,
+                    'category_id' => $categoyModel->id,
+                ];
+
+                $subcategoryModel = (new Subcategory())->create($subCategoryArray);
             }
+
         }
     }
 }
