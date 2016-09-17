@@ -1,15 +1,6 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| Here you may define all of your model factories. Model factories give
-| you a convenient way to create models for testing and seeding your
-| database. Just tell the factory how a default model should look.
-|
-*/
+use App\Models\Company;
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
@@ -19,5 +10,19 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+
+$factory->define(Company::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->company,
+        'address' => $faker->streetAddress,
+        'phone' => $faker->phoneNumber,
+        'facebook' => $faker->url,
+        'twitter' => $faker->url,
+        'web' => $faker->url,
+        'email' => $faker->email,
+        'description' => $faker->paragraph,
     ];
 });

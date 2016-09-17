@@ -23,7 +23,7 @@ class CreateTableCompanies extends Migration
             $table->string('twitter');
             $table->string('web');
             $table->string('email');
-            $table->string('description');
+            $table->longText('description');
             $table->softDeletes();
             $table->timestamps();
         });

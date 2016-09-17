@@ -15,7 +15,7 @@ class CampaniesSubcategories extends Migration
     {
         Schema::create('companies_subcategories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('company_id');
+            $table->integer ('company_id');
             $table->integer('subcategory_id');
 
             

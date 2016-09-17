@@ -12,51 +12,71 @@ class generalSeed extends Seeder
      */
     public function run()
     {
-        $objects = [
 
-            'comercial' => [
-                'aberturas',
-                'alarmas',
-                'automotores',
-                'cabañas'
-            ],
-            'profesional' => [
-                'abogados',
-                'contadores',
-                'escribanias',
-                'arquitectos',
-                'agrimensores',
-            ],
-            'salud' => [
-                'acupuntura',
-                'bioquimicos',
-                'cardiologia',
-                'cirugia',
-                'demartologia',
-                'enfermerias'
-            ]
+            $objects = [
 
-        ];
+                'comercial' => [
+                    'aberturas',
+                    'alarmas',
+                    'automotores',
+                    'cabañas'
+                ],
+                'profesional' => [
+                    'abogados',
+                    'contadores',
+                    'escribanias',
+                    'arquitectos',
+                    'agrimensores',
+                ],
+                'salud' => [
+                    'acupuntura',
+                    'bioquimicos',
+                    'cardiologia',
+                    'cirugia',
+                    'demartologia',
+                    'enfermerias'
+                ]
 
-
-        foreach ($objects as $category=>$subcategories) {
-
-            $categoryArray = [
-                'name' => $category,
             ];
 
-            $categoyModel = (new Category())->create($categoryArray);
+            Company::truncate();
+            Category::truncate();
+            Subcategory::truncate();
 
-            foreach($subcategories as $subcategory){
 
-                $subCategoryArray = [
-                    'name' => $subcategory,
-                    'category_id' => $categoyModel->id,
+            foreach ($objects as $category=>$subcategories) {
+
+                $categoryArray = [
+                    'name' => $category,
                 ];
 
-                $subcategoryModel = (new Subcategory())->create($subCategoryArray);
+                $categoyModel = (new Category())->create($categoryArray);
+
+                foreach($subcategories as $subcategory){
+
+                    $subCategoryArray = [
+                        'name' => $subcategory,
+                        'category_id' => $categoyModel->id,
+                    ];
+
+                    $subcategoryModel = (new Subcategory())->create($subCategoryArray);
+                }
             }
 
-        }
+
+            $companies = factory(Company::class, 50)->create();
+
+
+            foreach($companies as $company){
+
+                $subcategories = Subcategory::select('id')->pluck('id')->toArray();
+
+
+
+                $subcategoriesArray= array_rand($subcategories, 2);
+
+
+                $company->subcategories()->attach($subcategoriesArray);
+            }
     }
 }

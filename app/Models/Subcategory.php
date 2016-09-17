@@ -26,6 +26,6 @@ class Subcategory extends Model{
 
     public function companies()
     {
-        return $this->belongsToMany(Company::class, 'companies_subcategories', 'company_id', 'subcategory_id');
+        return $this->belongsToMany(Company::class, 'companies_subcategories', 'subcategory_id', 'company_id');
     }
 }
