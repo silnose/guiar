@@ -10,6 +10,10 @@ use Alert;
 
 class CategoryController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Listado de registros
+     */
     public function index()
     {
         $categories = Category::all();
@@ -21,6 +25,10 @@ class CategoryController extends Controller
         return view('dash.categories.index',$data);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Crear vista
+     */
     public function create()
     {
         $categories = Category::all();
@@ -32,6 +40,11 @@ class CategoryController extends Controller
         return view('dash.categories.create',$data);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * Guardar registro
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -44,6 +57,11 @@ class CategoryController extends Controller
         return redirect()->route('categories.index');
     }
 
+    /**
+     * @param $uuid
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * Editar vista
+     */
     public function edit($uuid)
     {
         $category = Category::where('uuid',$uuid)->first();
@@ -60,6 +78,12 @@ class CategoryController extends Controller
         return view('dash.categories.edit',$data);
     }
 
+    /**
+     * @param Request $request
+     * @param $uuid
+     * @return \Illuminate\Http\RedirectResponse
+     * Actalizar registro
+     */
     public function update(Request $request,$uuid)
     {
 
@@ -80,6 +104,11 @@ class CategoryController extends Controller
         return redirect()->route('categories.index');
     }
 
+    /**
+     * @param $uuid
+     * @return \Illuminate\Http\RedirectResponse
+     * Eliminar registro
+     */
     public function destroy($uuid)
     {
         $category = Category::where('uuid',$uuid)->first();
