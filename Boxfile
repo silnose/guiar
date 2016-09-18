@@ -43,6 +43,7 @@ web1:
     - "mkdir -p storage/framework/sessions"
     - "mkdir -p storage/framework/cache"
     - "php artisan migrate --no-interaction --env force_production"
+    - "php artisan db:seed"
   network_dirs:
     - storage/framework/sessions
     - storage/framework/views
