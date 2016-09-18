@@ -9,6 +9,7 @@ return [
         'success_delete_record' => 'El registro se elimino con exito.',
         //Fail
         'fail_title' => 'Ops!',
-        'fail_record_not_found' => 'Registro no encontrado.'
+        'fail_record_not_found' => 'Registro no encontrado.',
+        'fail_login' => 'Credenciales invalidas.',
     ],
 ];

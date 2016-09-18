@@ -1,14 +1,10 @@
 <?php
-
-/*
- * Taken from
- * https://github.com/laravel/framework/blob/5.2/src/Illuminate/Auth/Console/stubs/make/controllers/HomeController.stub
- */
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Alert;
 
 /**
  * Class HomeController
@@ -16,23 +12,32 @@ use Illuminate\Http\Request;
  */
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //$this->middleware('auth');
-    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return Response
-     */
     public function index()
     {
-        return view('home');
+        return view('welcome');
+    }
+
+    public function login(){
+
+        return view('auth.login');
+    }
+
+    public function authenticate(Request $request)
+    {
+        $user = $request->all();
+
+        if (Auth::attempt(['email' => $user['email'], 'password' => $user['password']])) {
+            // Authentication passed...
+            return redirect()->route('categories.index');
+        }else{
+
+            return redirect()->route('login')->withErrors('Credenciales invalidas.');
+        }
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('home');
     }
 }
