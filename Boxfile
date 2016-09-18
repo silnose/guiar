@@ -50,6 +50,7 @@ web1:
     - storage/framework/cache
     - storage/logs
     - storage/app
+    - bootstrap/*
   php_extensions:
     - soap
     - fileinfo
