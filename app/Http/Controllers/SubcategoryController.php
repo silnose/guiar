@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Models\Category;
+use App\Models\Subcategory;
 use Alert;
 
 /**
- * Class CategoryController
+ * Class SubcategoryController
  * @package App\Http\Controllers
- *
  */
-class CategoryController extends Controller
+class SubcategoryController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -20,14 +20,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        
-        $categories = Category::all();
+        $subcategories = Subcategory::all();
 
         $data=[
-            'categories' => $categories
+            'subcategories' => $subcategories
         ];
 
-        return view('dash.categories.index',$data);
+        return view('dash.subcategories.index',$data);
     }
 
     /**
@@ -36,13 +35,15 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $subcategories = Subcategory::all();
         $categories = Category::all();
 
         $data=[
+            'subcategories' => $subcategories,
             'categories' => $categories
         ];
 
-        return view('dash.categories.create',$data);
+        return view('dash.subcategories.create',$data);
     }
 
     /**
@@ -53,13 +54,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:categories',
+            'name' => 'required|unique:subcategories',
+            'category_id' => 'required|integer'
         ]);
 
-        Category::create($request->all());
+        Subcategory::create($request->all());
 
         Alert::success(config('guiar.msj.success_create_record'), config('success_title'));
-        return redirect()->route('categories.index');
+        return redirect()->route('subcategories.index');
     }
 
     /**
@@ -69,18 +71,20 @@ class CategoryController extends Controller
      */
     public function edit($uuid)
     {
-        $category = Category::where('uuid',$uuid)->first();
+        $subcategory = Subcategory::where('uuid',$uuid)->first();
+        $categories = Category::all();
 
-        if(!$category){
+        if(!$subcategory){
             Alert::error(config('guiar.msj.fail_record_not_found'), config('fail_title'));
-            return redirect()->route('categories.index');
+            return redirect()->route('subcategories.index');
         }
 
         $data=[
-            'category' => $category
+            'subcategory' => $subcategory,
+            'categories' => $categories
         ];
 
-        return view('dash.categories.edit',$data);
+        return view('dash.subcategories.edit',$data);
     }
 
     /**
@@ -91,22 +95,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request,$uuid)
     {
+        $subcategory = Subcategory::where('uuid',$uuid)->first();
 
-        $category = Category::where('uuid',$uuid)->first();
-
-        if(!$category){
+        if(!$subcategory){
             Alert::error(config('guiar.msj.fail_record_not_found'), config('fail_title'));
-            return redirect()->route('categories.index');
+            return redirect()->route('subcategories.index');
         }
 
         $this->validate($request, [
-            'name' => 'required|unique:categories,id,'.$category->id
+            'name' => 'required|unique:subcategories,id,'.$subcategory->id,
+            'category_id' => 'required|integer'
         ]);
 
-        $category->update($request->all());
+        $subcategory->update($request->all());
 
         Alert::success(config('guiar.msj.success_update_record'), config('success_title'));
-        return redirect()->route('categories.index');
+        return redirect()->route('subcategories.index');
     }
 
     /**
@@ -116,17 +120,17 @@ class CategoryController extends Controller
      */
     public function destroy($uuid)
     {
-        $category = Category::where('uuid',$uuid)->first();
+        $category = Subcategory::where('uuid',$uuid)->first();
 
         if(!$category){
             Alert::error(config('guiar.msj.fail_record_not_found'), config('fail_title'));
-            return redirect()->route('categories.index');
+            return redirect()->route('subcategories.index');
         }
 
         $category->delete();
 
         Alert::success(config('guiar.msj.success_delete_record'), config('success_title'));
-        return redirect()->route('categories.index');
+        return redirect()->route('subcategories.index');
     }
 
 

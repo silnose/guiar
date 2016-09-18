@@ -37,7 +37,7 @@
                             <td>{{$category->id}}</td>
                             <td>{{$category->name}}</td>
                             <td>
-                                <div class="col-xs-1 col-sm-2 clearfix ">
+                                <div class="col-xs-4 col-sm-3 clearfix ">
                                     <a title="Actualizar"
                                        href="{{route('categories.edit',['category'=>$category->uuid])}}">
                                         <span class="badge bg-blue"><i class="fa fa-pencil"></i></span>

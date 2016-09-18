@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('contentheader_title')
-    Categorías
+    Subcategorías
 @endsection
 
 @section('htmlheader_title')
-    Actualizar Categoría
+    Actualizar Subcategoría
 @endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('categories.index')}}"><i class="fa fa-dashboard"></i> @yield('contentheader_title')</a></li>
-    <li><a href="{{route('categories.edit',['category' =>$category->uuid])}}">Actualizar {{$category->name}}</a></li>
+    <li><a href="{{route('subcategories.index')}}"><i class="fa fa-dashboard"></i> @yield('contentheader_title')</a></li>
+    <li><a href="{{route('subcategories.edit',['category' =>$subcategory->uuid])}}">Actualizar {{$subcategory->name}}</a></li>
 @endsection
 
 @section('main-content')
@@ -29,14 +29,22 @@
                         </ul>
                     </div>
                 @endif
-                <form role="form" method="post" action="{{route('categories.update',['uuid'=>$category->uuid])}}">
+                <form role="form" method="post" action="{{route('subcategories.update',['uuid'=>$subcategory->uuid])}}">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
                     <div class="box-body">
                         <div class="form-group">
                             <label for="default">Nombre</label>
-                            <input type="input" name="name" value="{{$category->name}}" class="form-control"
+                            <input type="input" name="name" value="{{$subcategory->name}}" class="form-control"
                                    id="default" placeholder="">
+                        </div>
+                        <div class="form-group">
+                        <label for="type">Categoría</label>
+                        <select class="form-control" name="category_id">
+                            @foreach ($categories as $category)
+                                <option <?=($category->id==$subcategory->category_id) ? "selected":""; ?> class="form-control" value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
                         </div>
                     </div>
                     <!-- /.box-body -->

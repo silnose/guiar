@@ -28,12 +28,20 @@
                         </ul>
                     </div>
                 @endif
-                <form role="form" method="post" action="{{route('categories.store')}}">
+                <form role="form" method="post" action="{{route('subcategories.store')}}">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="form-group">
                             <label for="default">Nombre</label>
                             <input type="input" name="name" class="form-control" id="default" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Categoría</label>
+                            <select class="form-control" name="category_id">
+                                @foreach ($categories as $category)
+                                    <option class="form-control" value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <!-- /.box-body -->

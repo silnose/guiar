@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Category;
+use App\Models\Company;
+use App\Models\Subcategory;
 
 class generalSeed extends Seeder
 {
