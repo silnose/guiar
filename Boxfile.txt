@@ -1,0 +1,71 @@
+---
+global:
+  env:
+    - APP_ENV: develop
+    - APP_DEBUG: true
+    - APP_KEY: eDAn1qQw0u42zEEE8P5hWtXZVQNlATyH
+    - DB_CONNECTION: mysql
+    - DB_HOST: "MAP:DATABASE1_HOST"
+    - DB_DATABASE: "MAP:DATABASE1_NAME"
+    - DB_USERNAME: "MAP:DATABASE1_USER"
+    - DB_PASSWORD: "MAP:DATABASE1_PASS"
+    - CACHE_DRIVER: file
+    - SESSION_DRIVER: file
+    - MAIL_DRIVER: smtp
+    - MAIL_HOST:
+    - MAIL_PORT: 587
+    - MAIL_USERNAME:
+    - MAIL_PASSWORD:
+    - MAIL_ENCRYPTION: null
+    - CACHE_DRIVER: file
+    - QUEUE_DRIVER: database
+
+build:
+  after_exec:
+    - "composer dump-autoload --optimize"
+web1:
+  type: php
+  version: 7.0
+  httpd_document_root: public
+  log_watch:
+    laravel[error]: 'storage/logs/laravel.log'
+  after_deploy:
+    - "php artisan cache:clear"
+    - "php artisan clear-compiled   # moved from composer.json -> post-install-cmd"
+    - "php artisan optimize # moved from composer.json -> post-install-cmd"
+    - "rm -f storage/app/*"
+    - "rm -f -R storage/framework/sessions/*"
+    - "rm -f -R storage/framework/views/*"
+    - "rm -f -R storage/framework/cache/*"
+    - "rm -f -R storage/logs/*"
+  before_deploy:
+    - "mkdir -p storage/framework/views"
+    - "mkdir -p storage/framework/sessions"
+    - "mkdir -p storage/framework/cache"
+    - "php artisan migrate --no-interaction --env force_production"
+  network_dirs:
+    - storage/framework/sessions
+    - storage/framework/views
+    - storage/framework/cache
+    - storage/logs
+    - storage/app
+  php_extensions:
+    - soap
+    - fileinfo
+    - gd
+    - json
+    - mbstring
+    - mcrypt
+    - tokenizer
+    - pdo_mysql
+    - xcache
+  database1:
+    name: apicultordb
+    type: mysql
+    topology: single
+    version: 5.6.30
+  storage1:
+    type: unfs
+    version: 0.9
+
+
