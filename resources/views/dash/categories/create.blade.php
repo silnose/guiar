@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
 @section('contentheader_title')
-    Categorias
+    Categorías
+@endsection
+
+@section('htmlheader_title')
+    Crear Categoría
 @endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('categories.index')}}"><i class="fa fa-dashboard"></i>  @yield('contentheader_title')</a></li>
+    <li><a href="{{route('categories.index')}}"><i class="fa fa-dashboard"></i> @yield('contentheader_title')</a></li>
     <li><a href="{{route('categories.create')}}">Crear</a></li>
 @endsection
 
