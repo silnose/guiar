@@ -1,26 +1,23 @@
 @extends('layouts.app')
 
 @section('contentheader_title')
-    Categorías
+    Subcategorías
 @endsection
 
 @section('htmlheader_title')
-    Crear Categoría
+    Crear Subcategoría
 @endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('categories.index')}}"><i class="fa fa-dashboard"></i> @yield('contentheader_title')</a></li>
-    <li><a href="{{route('categories.create')}}">Crear</a></li>
+    <li><a href="{{route('subcategories.index')}}"><i class="fa fa-dashboard"></i> @yield('contentheader_title')</a></li>
+    <li><a href="{{route('subcategories.create')}}">Crear</a></li>
 @endsection
-
-
 
 @section('main-content')
 
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">@yield('htmlheader_title')</div>
-
             <div class="panel-body">
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">

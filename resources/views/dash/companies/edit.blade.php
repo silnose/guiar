@@ -5,15 +5,13 @@
 @endsection
 
 @section('htmlheader_title')
-    Crear Categoría
+    Actualizar Categoría
 @endsection
 
 @section('breadcrumb')
     <li><a href="{{route('categories.index')}}"><i class="fa fa-dashboard"></i> @yield('contentheader_title')</a></li>
-    <li><a href="{{route('categories.create')}}">Crear</a></li>
+    <li><a href="{{route('categories.edit',['category' =>$category->uuid])}}">Actualizar {{$category->name}}</a></li>
 @endsection
-
-
 
 @section('main-content')
 
@@ -31,12 +29,14 @@
                         </ul>
                     </div>
                 @endif
-                <form role="form" method="post" action="{{route('categories.store')}}">
+                <form role="form" method="post" action="{{route('categories.update',['uuid'=>$category->uuid])}}">
                     {{ csrf_field() }}
+                    {{ method_field('PATCH') }}
                     <div class="box-body">
                         <div class="form-group">
                             <label for="default">Nombre</label>
-                            <input type="input" name="name" class="form-control" id="default" placeholder="">
+                            <input type="input" name="name" value="{{$category->name}}" class="form-control"
+                                   id="default" placeholder="">
                         </div>
                     </div>
                     <!-- /.box-body -->

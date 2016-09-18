@@ -13,8 +13,6 @@
     <li><a href="{{route('categories.create')}}">Crear</a></li>
 @endsection
 
-
-
 @section('main-content')
 
     <div class="row">
