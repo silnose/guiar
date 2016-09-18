@@ -178,6 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class
 
     ],
 
@@ -227,6 +228,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
         'Uuid' => Webpatser\Uuid\Uuid::class,
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class
 
     ],
 

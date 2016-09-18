@@ -6,6 +6,26 @@
 <script src="{{ asset('/js/bootstrap.min.js') }}" type="text/javascript"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('/js/app.min.js') }}" type="text/javascript"></script>
+<!-- Sweet Alert -->
+<script src="{{ asset('/bower_components/sweetalert/dist/sweetalert.min.js') }}" type="text/javascript"></script>
+
+@include('sweet::alert')
+
+<script>
+    $(function () {
+
+        $('.gdelete').on('click',function() {
+            var id= $(this).data('id');
+
+            console.log(id)
+            var txt;
+            var r = confirm("¿Esta seguro que desea borrar el registro?");
+            if (r == true) {
+                $('#form-delete-'+id).submit();
+            }
+        });
+    });
+</script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the
