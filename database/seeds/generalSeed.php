@@ -16,6 +16,11 @@ class generalSeed extends Seeder
     public function run()
     {
 
+        Company::truncate();
+        Category::truncate();
+        Subcategory::truncate();
+        User::truncate();
+
         $user = [
             'name' => 'admin',
             'email' => 'admin@gmail.com',
