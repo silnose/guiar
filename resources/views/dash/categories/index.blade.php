@@ -54,8 +54,12 @@
                             </td>
                         </tr>
                     @endforeach
-
                 </table>
+                <div class="box-footer clearfix">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        {{ $categories->links() }}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

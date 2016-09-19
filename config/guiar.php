@@ -12,4 +12,5 @@ return [
         'fail_record_not_found' => 'Registro no encontrado.',
         'fail_login' => 'Credenciales invalidas.',
     ],
+    'paginate' => 20
 ];

@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Models\Category;
+use App\Models\Company;
 use Alert;
 
 /**
- * Class CategoryController
+ * Class CompanyController
  * @package App\Http\Controllers
- *
  */
-class CategoryController extends Controller
+class CompanyController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -20,15 +20,14 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        
-        $categories = Category::orderBy('id','desc')
+        $companies = Company::orderBy('id','desc')
             ->paginate(config('guiar.paginate'));
 
         $data=[
-            'categories' => $categories
+            'companies' => $companies
         ];
 
-        return view('dash.categories.index',$data);
+        return view('dash.companies.index',$data);
     }
 
     /**
@@ -37,13 +36,15 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $companies = Company::all();
+        $subcategories = Subcategory::all();
 
         $data=[
-            'categories' => $categories
+            'companies' => $companies,
+            'subcategories' =>$subcategories,
         ];
 
-        return view('dash.categories.create',$data);
+        return view('dash.companies.create',$data);
     }
 
     /**
@@ -53,14 +54,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $storeArray = $request->all();
+
         $this->validate($request, [
-            'name' => 'required|unique:categories',
+            'name' => 'required|unique:companies',
+            'subcategory_id' => 'required|integer',
         ]);
 
-        Category::create($request->all());
+        $company = Company::create($storeArray);
+        $company->subcategories()->attach($storeArray['subcategory_id']);
 
         Alert::success(config('guiar.msj.success_create_record'), config('success_title'));
-        return redirect()->route('categories.index');
+        return redirect()->route('companies.index');
     }
 
     /**
@@ -70,18 +75,20 @@ class CategoryController extends Controller
      */
     public function edit($uuid)
     {
-        $category = Category::where('uuid',$uuid)->first();
+        $company = Company::where('uuid',$uuid)->first();
+        $subcategories = Subcategory::all();
 
-        if(!$category){
+        if(!$company){
             Alert::error(config('guiar.msj.fail_record_not_found'), config('fail_title'));
-            return redirect()->route('categories.index');
+            return redirect()->route('companies.index');
         }
 
         $data=[
-            'category' => $category
+            'company' => $company,
+            'subcategories' =>$subcategories,
         ];
 
-        return view('dash.categories.edit',$data);
+        return view('dash.companies.edit',$data);
     }
 
     /**
@@ -92,22 +99,26 @@ class CategoryController extends Controller
      */
     public function update(Request $request,$uuid)
     {
+        $updateArray = $request->all();
 
-        $category = Category::where('uuid',$uuid)->first();
+        $company = Company::where('uuid',$uuid)->first();
 
-        if(!$category){
+        if(!$company){
             Alert::error(config('guiar.msj.fail_record_not_found'), config('fail_title'));
-            return redirect()->route('categories.index');
+            return redirect()->route('companies.index');
         }
 
         $this->validate($request, [
-            'name' => 'required|unique:categories,id,'.$category->id
+            'name' => 'required|unique:companies,id,'.$company->id,
+            'subcategory_id' => 'required|integer'
         ]);
 
-        $category->update($request->all());
+        $company->update($updateArray);
+        $company->subcategories()->delete();
+        $company->subcategories()->attach($updateArray['subcategory_id']);
 
         Alert::success(config('guiar.msj.success_update_record'), config('success_title'));
-        return redirect()->route('categories.index');
+        return redirect()->route('companies.index');
     }
 
     /**
@@ -117,17 +128,17 @@ class CategoryController extends Controller
      */
     public function destroy($uuid)
     {
-        $category = Category::where('uuid',$uuid)->first();
+        $company = Company::where('uuid',$uuid)->first();
 
-        if(!$category){
+        if(!$company){
             Alert::error(config('guiar.msj.fail_record_not_found'), config('fail_title'));
-            return redirect()->route('categories.index');
+            return redirect()->route('companies.index');
         }
 
-        $category->delete();
+        $company->delete();
 
         Alert::success(config('guiar.msj.success_delete_record'), config('success_title'));
-        return redirect()->route('categories.index');
+        return redirect()->route('companies.index');
     }
 
 

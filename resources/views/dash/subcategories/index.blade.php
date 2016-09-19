@@ -58,6 +58,11 @@
                     @endforeach
 
                 </table>
+                <div class="box-footer clearfix">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        {{ $subcategories->links() }}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

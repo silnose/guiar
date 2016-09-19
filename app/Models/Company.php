@@ -26,6 +26,18 @@ class Company extends Model{
     {
         return $this->belongsToMany(Subcategory::class, 'companies_subcategories', 'company_id', 'subcategory_id');
     }
+
+    /* Mutators */
+
+    public function getNameAttribute($name){
+
+        return ucwords($name);
+    }
+
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
     
 }
 

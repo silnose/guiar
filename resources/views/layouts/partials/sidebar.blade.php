@@ -9,6 +9,7 @@
             <li class="header">Herramientas</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-home'></i> <span>Inicio</span></a></li>
+            <li><a href="{{route('companies.index')}}"><i class='fa fa-asterisk'></i> <span>Empresas</span></a></li>
             <li><a href="{{route('categories.index')}}"><i class='fa fa-asterisk'></i> <span>Categorías</span></a></li>
             <li><a href="{{route('subcategories.index')}}"><i class='fa fa-asterisk'></i> <span>Subcategorías</span></a></li>
 

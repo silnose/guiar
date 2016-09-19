@@ -20,7 +20,8 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        $subcategories = Subcategory::all();
+        $subcategories = Subcategory::orderBy('id','desc')
+            ->paginate(config('guiar.paginate'));
 
         $data=[
             'subcategories' => $subcategories
