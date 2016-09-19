@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Subcategory;
+use App\User;
 
 class generalSeed extends Seeder
 {
@@ -14,6 +15,14 @@ class generalSeed extends Seeder
      */
     public function run()
     {
+
+        $user = [
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('secret'),
+        ];
+
+        User::create($user);
 
             $objects = [
 
@@ -44,8 +53,6 @@ class generalSeed extends Seeder
             Company::truncate();
             Category::truncate();
             Subcategory::truncate();
-
-
             foreach ($objects as $category=>$subcategories) {
 
                 $categoryArray = [
@@ -64,20 +71,11 @@ class generalSeed extends Seeder
                     $subcategoryModel = (new Subcategory())->create($subCategoryArray);
                 }
             }
-
-
             $companies = factory(Company::class, 50)->create();
 
-
             foreach($companies as $company){
-
                 $subcategories = Subcategory::select('id')->pluck('id')->toArray();
-
-
-
                 $subcategoriesArray= array_rand($subcategories, 2);
-
-
                 $company->subcategories()->attach($subcategoriesArray);
             }
     }
