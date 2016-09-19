@@ -41,18 +41,22 @@
                             <td>{{$company->subcategories->first()->category->name}}</td>
                             <td>{{$company->subcategories->first()->name}}</td>
                             <td>
-                                <a title="Actualizar"
-                                   href="{{route('companies.edit',['company'=>$company->uuid])}}">
-                                    <span class="badge bg-blue"><i class="fa fa-pencil"></i></span>
-                                </a>
-                                <form class="form-inline" method="post" id="form-delete-{{$company->uuid}}"
-                                      action="{{route('companies.destroy',['category'=>$company->uuid])}}">
-                                    <a class="gdelete" title="Eliminar" href="#" data-id="{{$company->uuid}}"
-                                       data-route="{{route('companies.destroy',['category'=>$company   ->uuid])}}">
-                                        <span class="badge bg-red"><i class="fa fa-remove"></i></span></a>
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-                                </form>
+                                <div class="col-sm-1 col-md-1 col-xs-2 col-lg-1">
+                                    <a title="Actualizar"
+                                       href="{{route('companies.edit',['company'=>$company->uuid])}}">
+                                        <span class="badge bg-blue"><i class="fa fa-pencil"></i></span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-1 col-md-1 col-xs-2 col-lg-1">
+                                    <form class="form-inline" method="post" id="form-delete-{{$company->uuid}}"
+                                          action="{{route('companies.destroy',['category'=>$company->uuid])}}">
+                                        <a class="gdelete" title="Eliminar" href="#" data-id="{{$company->uuid}}"
+                                           data-route="{{route('companies.destroy',['category'=>$company   ->uuid])}}">
+                                            <span class="badge bg-red"><i class="fa fa-remove"></i></span></a>
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

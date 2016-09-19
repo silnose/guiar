@@ -20,6 +20,9 @@ class HomeController extends Controller
 
     public function login(){
 
+        if (Auth::check()) {
+            return redirect()->route('companies.index');
+        }
         return view('auth.login');
     }
 

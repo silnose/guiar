@@ -40,18 +40,26 @@
                             <td>{{$subcategory->name}}</td>
                             <td>{{$subcategory->category->name}}</td>
                             <td>
-                                <a title="Actualizar"
-                                   href="{{route('subcategories.edit',['category'=>$subcategory->uuid])}}">
-                                    <span class="badge bg-blue"><i class="fa fa-pencil"></i></span>
-                                </a>
-                                <form class="form-inline" method="post" id="form-delete-{{$subcategory->uuid}}"
-                                      action="{{route('subcategories.destroy',['category'=>$subcategory->uuid])}}">
-                                    <a class="gdelete" title="Eliminar" href="#" data-id="{{$subcategory->uuid}}"
-                                       data-route="{{route('subcategories.destroy',['category'=>$subcategory->uuid])}}">
-                                        <span class="badge bg-red"><i class="fa fa-remove"></i></span></a>
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-                                </form>
+                                <div class="row">
+                                    <div class="col-sm-1 col-md-1 col-xs-2 col-lg-1">
+                                        <a title="Actualizar"
+                                           href="{{route('subcategories.edit',['category'=>$subcategory->uuid])}}">
+                                            <span class="badge bg-blue"><i class="fa fa-pencil"></i></span>
+                                        </a>
+                                        </div>
+                                    <div class="col-sm-1 col-md-1 col-xs-2 col-lg-1">
+                                        <form class="" method="post" id="form-delete-{{$subcategory->uuid}}"
+                                              action="{{route('subcategories.destroy',['category'=>$subcategory->uuid])}}">
+                                            <a class="gdelete" title="Eliminar" href="#" data-id="{{$subcategory->uuid}}"
+                                               data-route="{{route('subcategories.destroy',['category'=>$subcategory->uuid])}}">
+                                                <span class="badge bg-red"><i class="fa fa-remove"></i></span></a>
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                        </form>
+                                    </div>
+
+                                </div>
+
                             </td>
                         </tr>
                     @endforeach
