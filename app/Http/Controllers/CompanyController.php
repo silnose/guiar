@@ -114,6 +114,7 @@ class CompanyController extends Controller
         ]);
 
         $company->update($updateArray);
+        $company->subcategories()->detach($company->subcategory_id);
         $company->subcategories()->attach($updateArray['subcategory_id']);
 
         Alert::success(config('guiar.msj.success_update_record'), config('success_title'));
