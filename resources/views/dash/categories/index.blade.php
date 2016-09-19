@@ -20,7 +20,7 @@
 
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-offset-11 col-xs-1 col-sm-1 clearfix">
+                    <div class="col-sm-3 col-md-2 col-xs-5 col-lg-1 pull-right">
                         <a href="{{route('categories.create')}}" type="button" class="btn btn-block btn-success"><i
                                     class="fa  fa-plus"></i> Crear</a>
                     </div>
@@ -37,20 +37,18 @@
                             <td>{{$category->id}}</td>
                             <td>{{$category->name}}</td>
                             <td>
-                                <div class="col-xs-1 col-sm-2 clearfix ">
-                                    <a title="Actualizar"
-                                       href="{{route('categories.edit',['category'=>$category->uuid])}}">
-                                        <span class="badge bg-blue"><i class="fa fa-pencil"></i></span>
-                                    </a>
-                                    <form style="float: right;" method="post" id="form-delete-{{$category->uuid}}"
-                                          action="{{route('categories.destroy',['category'=>$category->uuid])}}">
-                                        <a class="gdelete" title="Eliminar" href="#" data-id="{{$category->uuid}}"
-                                           data-route="{{route('categories.destroy',['category'=>$category->uuid])}}">
-                                            <span class="badge bg-red"><i class="fa fa-remove"></i></span></a>
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                    </form>
-                                </div>
+                                <a title="Actualizar"
+                                   href="{{route('categories.edit',['category'=>$category->uuid])}}">
+                                    <span class="badge bg-blue"><i class="fa fa-pencil"></i></span>
+                                </a>
+                                <form class="form-inline" method="post" id="form-delete-{{$category->uuid}}"
+                                      action="{{route('categories.destroy',['category'=>$category->uuid])}}">
+                                    <a class="gdelete" title="Eliminar" href="#" data-id="{{$category->uuid}}"
+                                       data-route="{{route('categories.destroy',['category'=>$category->uuid])}}">
+                                        <span class="badge bg-red"><i class="fa fa-remove"></i></span></a>
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                </form>
                             </td>
                         </tr>
                     @endforeach
