@@ -44,4 +44,10 @@ class HomeController extends Controller
         Auth::logout();
         return redirect()->route('home');
     }
+
+    public function dash(){
+        
+        $companies = Company::all();
+        
+    }
 }

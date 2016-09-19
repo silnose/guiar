@@ -28,7 +28,7 @@ class CategoryController extends Controller
             'categories' => $categories
         ];
 
-        return view('dash.categories.index',$data);
+        return view('admin.categories.index',$data);
     }
 
     /**
@@ -43,7 +43,7 @@ class CategoryController extends Controller
             'categories' => $categories
         ];
 
-        return view('dash.categories.create',$data);
+        return view('admin.categories.create',$data);
     }
 
     /**
@@ -81,7 +81,7 @@ class CategoryController extends Controller
             'category' => $category
         ];
 
-        return view('dash.categories.edit',$data);
+        return view('admin.categories.edit',$data);
     }
 
     /**

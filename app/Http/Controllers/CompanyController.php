@@ -27,7 +27,7 @@ class CompanyController extends Controller
             'companies' => $companies
         ];
 
-        return view('dash.companies.index',$data);
+        return view('admin.companies.index',$data);
     }
 
     /**
@@ -44,7 +44,7 @@ class CompanyController extends Controller
             'subcategories' =>$subcategories,
         ];
 
-        return view('dash.companies.create',$data);
+        return view('admin.companies.create',$data);
     }
 
     /**
@@ -88,7 +88,7 @@ class CompanyController extends Controller
             'subcategories' =>$subcategories,
         ];
 
-        return view('dash.companies.edit',$data);
+        return view('admin.companies.edit',$data);
     }
 
     /**

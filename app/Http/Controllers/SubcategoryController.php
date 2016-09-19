@@ -27,7 +27,7 @@ class SubcategoryController extends Controller
             'subcategories' => $subcategories
         ];
 
-        return view('dash.subcategories.index',$data);
+        return view('admin.subcategories.index',$data);
     }
 
     /**
@@ -44,7 +44,7 @@ class SubcategoryController extends Controller
             'categories' => $categories
         ];
 
-        return view('dash.subcategories.create',$data);
+        return view('admin.subcategories.create',$data);
     }
 
     /**
@@ -85,7 +85,7 @@ class SubcategoryController extends Controller
             'categories' => $categories
         ];
 
-        return view('dash.subcategories.edit',$data);
+        return view('admin.subcategories.edit',$data);
     }
 
     /**

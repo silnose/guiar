@@ -8,6 +8,7 @@ Route::post('authenticate','HomeController@authenticate')->name('authenticate');
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('dash','HomeController@dash');
     Route::resource('categories', 'CategoryController');
     Route::resource('subcategories', 'SubcategoryController');
     Route::resource('companies', 'CompanyController');
